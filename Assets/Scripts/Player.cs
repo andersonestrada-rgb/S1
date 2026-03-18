@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
-
-{    public int score = 0;
+{
+    public int life = 100;
+    public int score = 0;
+    public string Name = "Mambo";       
     [SerializeField] private float speed = 5.0f;
 
     public InputSystem_Actions inputs;
@@ -32,15 +34,10 @@ public class Player : MonoBehaviour
     {
         transform.position += (Vector3)input * speed * Time.deltaTime;
     }
-
-
-
-
     void Start()
     {
 
     }
-
 
     void Update()
     {
