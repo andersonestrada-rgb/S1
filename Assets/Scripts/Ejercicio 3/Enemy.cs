@@ -12,7 +12,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int life = 50;
+    public int life = 50;
     //private bool Hisfile = true;
 
     void Start()
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" || "Bullet")
         {
             life -= 10;
             print($"El enemigo tiene {life} de vida");

@@ -9,6 +9,7 @@ destruirse a sí misma.
 
 using System;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Bullet : MonoBehaviour
 {
@@ -29,5 +30,13 @@ public class Bullet : MonoBehaviour
     {
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
 }
