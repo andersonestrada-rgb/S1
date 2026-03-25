@@ -9,23 +9,33 @@ el eje X y reducir su vida cuando recibe daño.
 
 using System.Xml.Linq;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class PlayerBasic : Player
-{   
+{
+    [SerializeField] private GameObject bulletParent;
+        [SerializeField] private GameObject BulletPrefab;
+
     void Start()
     {        
         print($"Hola {Name}");
     }
-     
+
     void Update()
     {
-        
+        base.Update();
+        ShootProyectile();
     }
-      
+
+    protected override void MovementMechanise(Vector2 input)
+    {
+        // Solo movimiento en X
+        Vector2 onlyX = new Vector2(input.x, 0);
+        transform.position += (Vector3)onlyX * speed * Time.deltaTime;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "EnemyBallet")
+        if (collision.gameObject.tag == "BulletEnemy")
         {
             life -= 10;
             print($"Tienes {life} puntos de vida");
@@ -35,6 +45,16 @@ public class PlayerBasic : Player
                 print($"Has muerto");
                 Destroy(gameObject);
             }
+        }
+    }
+
+    public void ShootProyectile()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {        
+            GameObject bullet = Instantiate(BulletPrefab, bulletParent.transform);           //-> Crear 
+            bullet.transform.position = transform.position;                     //Coloca la bala en la posición del player
+                                                                            // bullet.transform.up;                                                             //Ajusta el ángulo de la bala a la ubicación del mouse
         }
     }
 }

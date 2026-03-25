@@ -11,7 +11,7 @@ using System;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class Bullet : MonoBehaviour
+public class BulletEnemy : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
     [SerializeField] private int damage = 10;
@@ -23,12 +23,12 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.position += Vector3.up * speed * Time.deltaTime;
+        transform.position += Vector3.down * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);
         }

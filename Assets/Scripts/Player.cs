@@ -6,9 +6,9 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Player : MonoBehaviour
 {
     public int life = 100;
-    public int score = 0;
+    public static int score = 0;
     public string Name = "Mambo";       
-    [SerializeField] private float speed = 5.0f;
+    [SerializeField] protected float speed = 5.0f;
 
     public InputSystem_Actions inputs;
     [SerializeField] private Vector2 MoveInput;
@@ -30,22 +30,16 @@ public class Player : MonoBehaviour
         MoveInput = context.ReadValue<Vector2>();
     }
 
-    private void MovementMechanise(Vector2 input)
+    protected virtual void MovementMechanise(Vector2 input) //private void MovementMechanise(Vector2 input)
     {
         transform.position += (Vector3)input * speed * Time.deltaTime;
     }
-    void Start()
-    {
 
-    }
-
-    void Update()
+    protected void Update()
     {
         if (MoveInput != Vector2.zero)
         {
             MovementMechanise(MoveInput);
         }
     }
-
-
 }
